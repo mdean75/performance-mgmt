@@ -1,0 +1,5 @@
+Gtk-Message: Failed to load module "overlay-scrollbar"
+Gtk-Message: Failed to load module "gail"
+Gtk-Message: Failed to load module "atk-bridge"
+Gtk-Message: Failed to load module "canberra-gtk-module"
+[1114/231548.399525:ERROR:x11_util.cc(103)] X IO error received (X server probably went away)
