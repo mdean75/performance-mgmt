@@ -19,4 +19,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::resource('users', 'UsersController');
+
 Route::resource('roles', 'RolesController');
+
+Route::resource('departments', 'DepartmentsController');
+
+Route::resource('teams', 'TeamsController');
+
+Route::resource('job_titles', 'JobTitlesController');
+
+Route::resource('pay_grades', 'PayGradesController');
