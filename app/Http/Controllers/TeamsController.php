@@ -15,6 +15,8 @@ class TeamsController extends Controller
     public function index()
     {
         //
+        $teams = Team::all();
+        return view('/teams.index', ['teams' => $teams]);
     }
 
     /**
@@ -25,6 +27,7 @@ class TeamsController extends Controller
     public function create()
     {
         //
+        return view('/teams/create');
     }
 
     /**
@@ -36,6 +39,13 @@ class TeamsController extends Controller
     public function store(Request $request)
     {
         //
+        $attributes = request()->validate([
+            'name'  =>  ['required', 'min:5', 'max:255']
+        ]);
+
+        Team::create($attributes);
+
+        return redirect('/teams')->with('message', 'Team "' . request('name'). '" Successfully Added');
     }
 
     /**
@@ -46,7 +56,7 @@ class TeamsController extends Controller
      */
     public function show(Team $team)
     {
-        //
+        // currently integrated with index due to small amount of data
     }
 
     /**
@@ -57,7 +67,7 @@ class TeamsController extends Controller
      */
     public function edit(Team $team)
     {
-        //
+        // currently integrated with index due to small amount of data
     }
 
     /**
@@ -69,7 +79,14 @@ class TeamsController extends Controller
      */
     public function update(Request $request, Team $team)
     {
-        //
+        // validate
+        $attributes = request()->validate([
+            'name'   => ['required', 'min:5']
+        ]);
+
+        $team->update($attributes);
+
+        return redirect('/teams')->with('message', 'Team "' . $team->name . '" Successfully updated');
     }
 
     /**
@@ -81,5 +98,8 @@ class TeamsController extends Controller
     public function destroy(Team $team)
     {
         //
+        Team::destroy($team->team_id);
+
+        return redirect('/teams')->with('message', 'Team "' . $team->name . '" Successfully deleted');
     }
 }
