@@ -81,8 +81,20 @@
                         <p class="text-center">Tuesday February 12, 2018</p></hr>
 
                     </div>
-
                 </div>
+                <div class="row justify-content-center">
+                    <div style="color: red">
+                        @foreach($errors->all() as $error)
+                            <p>{{ $error }}</p>
+
+                        @endforeach
+                        @if(session()->has('message'))
+                        <p>{{ session()->get('message') }}</p>
+                            @endif
+                    </div>
+                </div>
+
+
 
                 @yield('content')
 

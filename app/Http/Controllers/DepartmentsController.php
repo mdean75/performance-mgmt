@@ -15,6 +15,8 @@ class DepartmentsController extends Controller
     public function index()
     {
         //
+        $departments = Department::all();
+        return view('departments/index', ['department' => $departments]);
     }
 
     /**
@@ -25,6 +27,8 @@ class DepartmentsController extends Controller
     public function create()
     {
         //
+
+        return view('/departments.create');
     }
 
     /**
@@ -35,7 +39,14 @@ class DepartmentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate
+        $attributes = request()->validate([
+            'department_name'   => ['required', 'min:5']
+        ]);
+
+        Department::create($attributes);
+
+        return redirect('/departments')->with('message', 'Department "' . request('department_name'). '" Successfully Added');
     }
 
     /**
@@ -46,7 +57,7 @@ class DepartmentsController extends Controller
      */
     public function show(Department $department)
     {
-        //
+        // currently integrated with index due to small amount of data
     }
 
     /**
@@ -57,7 +68,7 @@ class DepartmentsController extends Controller
      */
     public function edit(Department $department)
     {
-        //
+        // currently intgrated with index due to small amount of data
     }
 
     /**
@@ -69,7 +80,14 @@ class DepartmentsController extends Controller
      */
     public function update(Request $request, Department $department)
     {
-        //
+
+        $attributes = request()->validate([
+            'department_name'   => ['required', 'min:5']
+        ]);
+
+        $department->update($attributes);
+
+        return redirect('/departments')->with('message', 'Department "' . $department->department_name . '" successfully updated');
     }
 
     /**
@@ -81,5 +99,10 @@ class DepartmentsController extends Controller
     public function destroy(Department $department)
     {
         //
+
+         Department::find($department->department_id)->delete();
+//
+
+        return redirect('departments');
     }
 }
