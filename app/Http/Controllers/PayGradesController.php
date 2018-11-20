@@ -15,6 +15,8 @@ class PayGradesController extends Controller
     public function index()
     {
         //
+        $pay_grades = PayGrade::all();
+        return view('/pay_grades.index', ['pay_grades' => $pay_grades]);
     }
 
     /**
@@ -25,6 +27,7 @@ class PayGradesController extends Controller
     public function create()
     {
         //
+        return view('/pay_grades.create');
     }
 
     /**
@@ -35,7 +38,15 @@ class PayGradesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // first validate
+        $attributes = request()->validate([
+            'pay_grade_name'    =>  ['required', 'min:2', 'max:5'],
+            'pay_grade_range'   =>  ['required', 'min:10', 'max:255']
+        ]);
+
+        PayGrade::create($attributes);
+
+        return redirect('/pay_grades')->with('message', 'Pay Grade "' . request('pay_grade_name'). '" Successfully Added');
     }
 
     /**
@@ -46,7 +57,7 @@ class PayGradesController extends Controller
      */
     public function show(PayGrade $payGrade)
     {
-        //
+        // currently integrated with index due to small amount of data
     }
 
     /**
@@ -57,7 +68,7 @@ class PayGradesController extends Controller
      */
     public function edit(PayGrade $payGrade)
     {
-        //
+        // currently integrated with index due to small amount of data
     }
 
     /**
@@ -69,7 +80,15 @@ class PayGradesController extends Controller
      */
     public function update(Request $request, PayGrade $payGrade)
     {
-        //
+        // first validate
+        $attributes = request()->validate([
+            'pay_grade_name'    =>  ['required', 'min:2', 'max:5'],
+            'pay_grade_range'   =>  ['required', 'min:10', 'max:255']
+        ]);
+
+        $payGrade->update($attributes);
+
+        return redirect('/pay_grades')->with('message', 'Pay Grade "' . $payGrade->pay_grade_name . '" Successfully updated');
     }
 
     /**
@@ -81,5 +100,8 @@ class PayGradesController extends Controller
     public function destroy(PayGrade $payGrade)
     {
         //
+        PayGrade::destroy($payGrade->pay_grade_id);
+
+        return redirect('/pay_grades')->with('message', 'Pay Grade "' . $payGrade->pay_grade_name. '" Successfully deleted');
     }
 }
