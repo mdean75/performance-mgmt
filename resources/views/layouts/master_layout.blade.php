@@ -53,8 +53,10 @@
                 <a class="nav-link dropdown-toggle" href="#" id="adminMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
                 <div class="dropdown-menu" aria-labelledBy="adminMenu">
                     <a class="dropdown-item" href="#">Employees</a>
-                    <a class="dropdown-item" href="#">Teams</a>
-                    <a class="dropdown-item" href="#">Site Management</a>
+                    <a class="dropdown-item" href="/departments">Departments</a>
+                    <a class="dropdown-item" href="/teams">Teams</a>
+                    <a class="dropdown-item" href="/job_titles">Job Titles</a>
+                    <a class="dropdown-item" href="/pay_grades">Pay Grades</a>
 
                 </div>
             </li>

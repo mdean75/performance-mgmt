@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
+use App\JobTitle;
+use App\PayGrade;
+use App\Team;
 use Illuminate\Http\Request;
+use App\User;
 
 class UsersController extends Controller
 {
@@ -13,7 +18,10 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        // list of all users
+        $users = User::all();
+
+        return view('/users/index', ['users' => $users]);
     }
 
     /**
@@ -24,6 +32,11 @@ class UsersController extends Controller
     public function create()
     {
         //
+        $departments = Department::all()->sortBy('department_name');
+        $teams = Team::all()->sortBy('name');
+        $job_titles = JobTitle::all()->sortBy('job_title_name');
+        $pay_grades = PayGrade::all()->sortBy('pay_grade_name');
+        return view('users.create', ['departments' => $departments, 'teams' => $teams, 'job_titles' => $job_titles, 'pay_grades' => $pay_grades]);
     }
 
     /**
