@@ -22,11 +22,12 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('phone')->nullable();
-            $table->integer('team_id')->unsigned();
-            $table->integer('manager_id')->unsigned();
-            $table->integer('job_title_id')->unsigned();
             $table->integer('department_id')->unsigned();
+            $table->integer('team_id')->unsigned();
+            $table->integer('job_title_id')->unsigned();
             $table->integer('pay_grade_id')->unsigned();
+            $table->integer('manager_id')->unsigned();
+            $table->boolean('is_manager')->default(false);
             $table->rememberToken();
             $table->timestamps();
 
