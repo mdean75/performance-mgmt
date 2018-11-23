@@ -5,37 +5,43 @@
 @endsection
 
 @section('subtitle')
-    Add New User
+    Edit User
+@endsection
+
+@section('background')
+    bg-update
 @endsection
 
 @section('content')
     <div class="container ">
         <form method="POST" action="/users" class="col-md-10 offset-md-1">
             @csrf
+            @method('PUT')
+
 
             <div class="form-row">
                 <div class="form-group col">
                     <label for="first_name">First Name</label>
-                    <input class="form-control" type="text" name="first_name" required value="{{ old('first_name') }}">
+                    <input class="form-control" type="text" name="first_name" required value="{{ $user->first_name }}">
 
                 </div>
 
                 <div class="form-group col ml-3">
 
                     <label for="name">Last Name</label>
-                    <input class="form-control" type="text" name="last_name" required value="{{ old('last_name') }}">
+                    <input class="form-control" type="text" name="last_name" required value="{{ $user->last_name }}">
                 </div>
             </div>
 
             <div class="form-row mb-3">
                 <div class="form-group col">
                     <label for="username">Username</label>
-                    <input class="form-control" type="text" name="username" required value="{{ old('username') }}">
+                    <input class="form-control" type="text" name="username" required value="{{ $user->username }}">
                 </div>
 
                 <div class="form-group col ml-3">
                     <label for="email">Email</label>
-                    <input class="form-control" type="text" name="email" required value="{{ old('email') }}">
+                    <input class="form-control" type="text" name="email" required value="{{ $user->email }}">
                 </div>
 
 
@@ -44,7 +50,7 @@
             <div class="form-row mb-5">
                 <div class="form-group col-md-4">
                     <label for="phone">Phone</label>
-                    <input class="form-control " type="text" name="phone" required value="{{ old('phone') }}">
+                    <input class="form-control " type="text" name="phone" required value="{{ $user->phone }}">
                 </div>
             </div>
 
@@ -52,9 +58,15 @@
                 <div class="form-group col">
                     <label for="department_id">Department</label>
                     <select class="form-control" name="department_id">
-                        <option>Select Department</option>
+
                         @foreach($departments as $department)
-                            <option value="{{ $department->department_id }}">{{ $department->department_name }}</option>
+                            <option value="{{ $department->department_id }}"
+                                @if($department->department_id == $user->department_id)
+                                    selected=selected
+                                @endif>
+                                {{ $department->department_name }}
+
+                            </option>
 
                         @endforeach
 
@@ -64,9 +76,14 @@
                 <div class="form-group col">
                     <label for="team_id">Team</label>
                     <select class="form-control" name="team_id">
-                        <option>Select Team</option>
+
                         @foreach($teams as $team)
-                            <option value="{{ $team->team_id }}">{{ $team->name }}</option>
+                            <option value="{{ $team->team_id }}"
+                                @if($team->team_id == $user->team_id)
+                                    selected=selected
+                                @endif>
+                                {{ $team->name }}
+                            </option>
 
                         @endforeach
 
@@ -78,9 +95,14 @@
                 <div class="form-group col">
                     <label for="job_title_id">Job Title</label>
                     <select class="form-control" name="job_title_id">
-                        <option>Select Job Title</option>
+
                         @foreach($job_titles as $job_title)
-                            <option value="{{ $job_title->job_title_id }}">{{ $job_title->job_title_name }}</option>
+                            <option value="{{ $job_title->job_title_id }}"
+                                @if($job_title->job_title_id == $user->job_title_id)
+                                    selected="selected"
+                                @endif>
+                                {{ $job_title->job_title_name }}
+                            </option>
 
                         @endforeach
 
@@ -90,9 +112,14 @@
                 <div class="form-group col">
                     <label for="pay_grade_id">Pay Grade</label>
                     <select class="form-control" name="pay_grade_id">
-                        <option>Select Pay Grade</option>
+
                         @foreach($pay_grades as $pay_grade)
-                            <option value="{{ $pay_grade->pay_grade_id }}">{{ $pay_grade->pay_grade_name }}</option>
+                            <option value="{{ $pay_grade->pay_grade_id }}"
+                                @if($pay_grade->pay_grade_id == $user->pay_grade_id)
+                                    selected="selected"
+                                @endif>
+                                {{ $pay_grade->pay_grade_name }}
+                            </option>
 
                         @endforeach
 
@@ -104,9 +131,12 @@
                 <div class="form-group col">
                     <label for="manager_id">Immediate Supervisor</label>
                     <select class="form-control" name="manager_id">
-                        <option>Select Manager</option>
+
                         @foreach($managers as $manager)
-                            <option value="{{ $manager->user_id }}">
+                            <option value="{{ $manager->manager_id }}"
+                                @if($manager->user_id == $user->manager_id)
+                                    selected="selected"
+                                @endif>
                                 {{ $manager->first_name . " " . $manager->last_name }}
                             </option>
 
@@ -117,16 +147,27 @@
             </div>
 
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="manager_check" name="manager_check">
+                <input type="checkbox" class="custom-control-input" id="manager_check" name="manager_check"
+                    @if($user->is_manager == true)
+                        checked="checked"
+                    @endif>
                 <label class="custom-control-label" for="manager_check">This employee is a manager</label>
             </div>
 
             <div class="mt-4 form-row">
-                <input class="btn btn-primary col-md-3" type="submit" value="Add">
-                <a href="/users" class="btn btn-outline-danger col-md-3 offset-md-1">Cancel</a>
+                <input class="btn btn-primary col-md-3" type="submit" value="Update">
+                <a href="/users/{{ $user->user_id }}" class="btn btn-outline-danger col-md-3 offset-md-1">Cancel</a>
             </div>
 
         </form>
     </div>
+
+    <script type="text/javascript">
+        // document.getElementById("card").classList.remove('bg-light');
+        // document.getElementById("card").classList.add('bg-success');
+
+        $('#card').removeClass('bg-light');
+
+    </script>
 
 @endsection

@@ -1,0 +1,7 @@
+/*
+* This background color class is meant to be used for the background color on the user update form to
+* distinguish the update form from the view user form
+*/
+.bg-update {
+    background-color: powderblue;
+}
