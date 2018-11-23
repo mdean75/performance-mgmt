@@ -27,7 +27,8 @@ class UsersTableSeeder extends Seeder
             'manager_id'    => 1,
             'job_title_id'  => 1,
             'department_id' => 1,
-            'pay_grade_id'  => 1
+            'pay_grade_id'  => 1,
+            'is_manager'    => 1
             ]);
 
     }
