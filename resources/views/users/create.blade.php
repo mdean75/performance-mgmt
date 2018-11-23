@@ -100,6 +100,34 @@
                 </div>
             </div>
 
+            <div class="form-row mb-3">
+                <div class="form-group col">
+                    <label for="manager_id">Immediate Supervisor</label>
+                    <select class="form-control" name="manager_id">
+                        <option>Select Manager</option>
+                        @foreach($managers as $manager)
+                            <option value="{{ $manager->manager_id }}">
+                                {{ $manager->first_name . " " . $manager->last_name }}
+                            </option>
+
+                        @endforeach
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="customCheck1" name="manager_check">
+                <label class="custom-control-label" for="customCheck1">This employee is a manager</label>
+            </div>
+
+            {{--<div class="btn-group-toggle" data-toggle="button">--}}
+                {{--<label class="btn btn-secondary active">--}}
+                    {{--<input type="checkbox" checked autocomplete="off"> Checked--}}
+                {{--</label>--}}
+                {{--<span id="toggle" class="invisible">The new employee is a manager</span>--}}
+            {{--</div>--}}
+
 
             <div class="mt-4 form-row">
                 <input class="btn btn-primary col-md-3" type="submit" value="Add">
@@ -108,5 +136,20 @@
 
         </form>
     </div>
+
+    <script>function myFunction() {
+            let x = document.getElementById("manager_toggle");
+            let y = document.getElementById('toggle_message');
+
+            if(x.classList.contains('active')) {
+                y.innerHTML = "this is a test";
+            }
+
+            // if (x.style.display === "none") {
+            //     x.style.display = "block";
+            // } else {
+            //     x.style.display = "none";
+            // }
+        }</script>
 
 @endsection

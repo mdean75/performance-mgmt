@@ -28,7 +28,8 @@ class User extends Authenticatable
             'manager_id',
             'job_title_id',
             'department_id',
-            'pay_grade_id'
+            'pay_grade_id',
+            'is_manager'
         ];
 
     /**
