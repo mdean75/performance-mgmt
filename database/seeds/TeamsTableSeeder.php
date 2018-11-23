@@ -14,6 +14,6 @@ class TeamsTableSeeder extends Seeder
     {
         //
 
-        Team::updateOrCreate(['name' => 'Development']);
+        Team::updateOrCreate(['name' => 'Development', 'department_id' => 1]);
     }
 }
