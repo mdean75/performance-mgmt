@@ -8,6 +8,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <!-- Custom CSS -->
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet" type="text/css" >
     <title>Employee Management System</title>
 </head>
 <body>
@@ -73,7 +75,7 @@
 <div class="container">
     <div class="row justify-content-center">
 
-        <div class="card border-primary col-sm-8 bg-light" style="margin-top: 50px;">
+        <div class="card border-primary col-sm-8 @yield('background', 'bg-light')" id="card" style="margin-top: 50px;">
             <div class="card-body text-dark mb-3">
                 <h1 class="text-center">@yield('title')</h1>
                 <h2 class="text-center">@yield('subtitle')</h2>
