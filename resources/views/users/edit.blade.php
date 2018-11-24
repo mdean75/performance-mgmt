@@ -14,10 +14,11 @@
 
 @section('content')
     <div class="container ">
-        <form method="POST" action="/users" class="col-md-10 offset-md-1">
+        <form method="POST" action="/users/{{ $user->user_id }}" class="col-md-10 offset-md-1">
             @csrf
             @method('PUT')
 
+            <input type="hidden" value="{{ $user->user_id }}">
 
             <div class="form-row">
                 <div class="form-group col">
@@ -147,11 +148,11 @@
             </div>
 
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="manager_check" name="manager_check"
+                <input type="checkbox" class="custom-control-input" id="is_manager" name="is_manager" value="1"
                     @if($user->is_manager == true)
                         checked="checked"
                     @endif>
-                <label class="custom-control-label" for="manager_check">This employee is a manager</label>
+                <label class="custom-control-label" for="is_manager">This employee is a manager</label>
             </div>
 
             <div class="mt-4 form-row">
@@ -161,13 +162,5 @@
 
         </form>
     </div>
-
-    <script type="text/javascript">
-        // document.getElementById("card").classList.remove('bg-light');
-        // document.getElementById("card").classList.add('bg-success');
-
-        $('#card').removeClass('bg-light');
-
-    </script>
 
 @endsection
