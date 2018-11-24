@@ -12,4 +12,8 @@ class PayGrade extends Model
     protected $primaryKey = 'pay_grade_id';
 
     protected $fillable = ['pay_grade_name', 'pay_grade_range'];
+
+    public function users() {
+        return $this->hasMany('App\User', 'pay_grade_id', 'pay_grade_id');
+    }
 }

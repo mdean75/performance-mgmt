@@ -12,4 +12,8 @@ class JobTitle extends Model
     protected $table = 'job_titles';
 
     protected $fillable = ['job_title_name'];
+
+    public function users() {
+        return $this->hasMany('App\User', 'job_title_id', 'job_title_id');
+    }
 }
