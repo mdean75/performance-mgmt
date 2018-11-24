@@ -42,16 +42,16 @@
 
             <div class="btn-group btn-group-sm btn-group-toggle ml-3">
                 <label class="btn btn-primary">
-                    <a href="/users/{{ $user->user_id }}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="/users/{{ $user->user_id }}" class="btn btn-primary btn-sm">View</a>
                 </label>
 
                 <label class="btn btn-danger">
-                <form method="post" action="users/{{ $user->id }}">
+                <form method="post" action="users/{{ $user->user_id }}">
                     @csrf
                     @method('DELETE')
 
                         <button type="submit" class="btn btn-sm btn-danger"
-                        onclick="return confirm('Are you sure you want to permanently Delete this Pay Grade?  ' +
+                        onclick="return confirm('Are you sure you want to permanently Delete this User?  ' +
                         'This action cannot be undone.');">DELETE</button>
 
                 </form>
