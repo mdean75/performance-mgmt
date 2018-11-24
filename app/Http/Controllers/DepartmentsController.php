@@ -68,7 +68,7 @@ class DepartmentsController extends Controller
      */
     public function edit(Department $department)
     {
-        // currently intgrated with index due to small amount of data
+        // currently integrated with index due to small amount of data
     }
 
     /**
@@ -101,7 +101,6 @@ class DepartmentsController extends Controller
         //
 
          Department::find($department->department_id)->delete();
-//
 
         return redirect('departments');
     }

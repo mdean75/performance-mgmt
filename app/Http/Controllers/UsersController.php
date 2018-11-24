@@ -143,7 +143,18 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // find the user by id, update the is_manager flag, then save all other attributes
+
+        $user = User::find($id);
+
+        // in order to account for a user record being updated to remove the is_manager flag we must check if
+        // the flag is present in the request and manually set to false if not.
+        $user->is_manager = $request->is_manager ?? false;
+
+        // save the updates to the user
+        $user->update($request->all());
+
+        return redirect("/users/$id")->with('message', 'User successfully updated');
     }
 
     /**
@@ -152,8 +163,12 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
         //
+
+        User::find($user->user_id)->delete();
+
+        return redirect('/users')->with('message', "User successfully deleted");
     }
 }
